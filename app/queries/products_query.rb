@@ -6,11 +6,11 @@ class ProductsQuery
   end
 
   def paginate(page = 1, per_page = DEFAULT_ENTRIES_PER_PAGE)
-    relation.page(page).per(per_page)
+    ProductsQuery.new(relation.page(page).per(per_page))
   end
 
   def search(query)
-    return relation unless query
-    relation.where('name ILIKE :query', query: "%#{params[:filter][:query]}%")
+    return ProductsQuery.new relation unless query
+    ProductsQuery.new relation.where('name ILIKE :query', query: "%#{query}%")
   end
 end

@@ -1,3 +1,3 @@
 class Product < ApplicationRecord
-  update_index('productsproduct') { self }
+  update_index('products#product') { self }
 end
