@@ -8,6 +8,7 @@ class ProductsController < ApplicationController
     products = ProductsQuery.new
                             .paginate(params[:page], params[:limit])
                             .search(params.dig(:filter, :query))
+                            .sort(params[:sort])
                             .relation
     options = {}
     options[:meta] = { total_pages: products.total_pages, total: Product.count }

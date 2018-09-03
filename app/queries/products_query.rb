@@ -13,4 +13,9 @@ class ProductsQuery
     return ProductsQuery.new relation unless query
     ProductsQuery.new relation.where('name ILIKE :query', query: "%#{query}%")
   end
+
+  def sort(field)
+    return ProductsQuery.new relation unless field
+    ProductsQuery.new relation.order(field)
+  end
 end
