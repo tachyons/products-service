@@ -5,8 +5,9 @@ class ProductsController < ApplicationController
   end
 
   def index
-    products = Product.page(params[:page] || 1).per(params[:limit] || 6)
-    products = products.where('name ILIKE :query', query: "%#{params[:filter][:query]}%") if params.dig(:filter,:query)
+    products = ProductsQuery
+               .paginate(params[:page], params[:limit])
+               .search(params.dig(:filter, :query))
     options = {}
     options[:meta] = { total_pages: products.total_pages, total: Product.count }
     render json: ProductSerializer.new(products, options)
