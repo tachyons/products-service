@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'Products', type: :request do
+  before do
+    allow(JsonWebToken).to receive(:decode).and_return([{ 'user_id' => user.id }])
+  end
+
   describe 'GET /products' do
     let(:user) { User.new(id: 1) }
 
