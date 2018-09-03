@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Products', type: :request do
   before do
     allow(JsonWebToken).to receive(:decode).and_return([{ 'user_id' => user.id }])
+    allow(JsonWebToken).to receive(:valid_payload).and_return(true)
   end
 
   describe 'GET /products' do
