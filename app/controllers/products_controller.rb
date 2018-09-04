@@ -8,6 +8,7 @@ class ProductsController < ApplicationController
     products = ProductsQuery.new
                             .paginate(params[:page], params[:limit])
                             .search(params.dig(:filter, :query))
+                            .filter(params.dig(:filter, :category))
                             .sort(params[:sort])
                             .relation
     options = {}

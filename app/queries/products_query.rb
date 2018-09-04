@@ -11,12 +11,17 @@ class ProductsQuery
   end
 
   def search(query)
-    return ProductsQuery.new relation unless query
+    return ProductsQuery.new relation unless query.present?
     ProductsQuery.new relation.where('name ILIKE :query', query: "%#{query}%")
   end
 
   def sort(field)
-    return ProductsQuery.new relation unless field
+    return ProductsQuery.new relation unless field.present?
     ProductsQuery.new relation.order(field)
+  end
+
+  def filter(category)
+    return ProductsQuery.new relation unless category.present?
+    ProductsQuery.new relation.where(category: category.split(','))
   end
 end
