@@ -1,6 +1,7 @@
 class ProductsQuery
   attr_reader :relation
   DEFAULT_ENTRIES_PER_PAGE = 6
+  delegate :to_a, to: :relation
   def initialize(relation = Product.all)
     @relation = relation
   end
